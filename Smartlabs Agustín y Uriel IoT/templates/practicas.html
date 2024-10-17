@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <!-- Espacio para el logotipo -->
+        <!-- <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="Logotipo" class="img-fluid" style="max-width: 400px;">
+        </div> -->
+
+        <!-- Título de la página -->
+        <h1 class="text-center title-animate">Seleccione la Práctica</h1>
+        <br>
+        <!-- Botones para ejecutar módulos -->
+        <div class="text-center mb-4">
+            <!--<button id="run-armonico-btn" class="btn btn-primary btn-lg mx-2 btn-animate">Ejecutar Armónico</button>
+            <button id="run-pendulo-btn" class="btn btn-secondary btn-lg mx-2 btn-animate">Ejecutar Péndulo</button>-->
+            <button id="run-graph_obstaculo-btn" class="btn btn-primary btn-lg mx-2 btn-animate">Gráfico Colision</button>
+            <button id="run-graph_distancia-btn" class="btn btn-secondary btn-lg mx-2 btn-animate">Gráfico Distancia</button>
+            <button id="run-table_obstaculo-btn" class="btn btn-primary btn-lg mx-2 btn-animate">Tabla Colision</button>
+            <button id="run-graph_hall-btn" class="btn btn-secondary btn-lg mx-2 btn-animate">Gráfico Hall</button>
+        </div>
+
+        <!-- Área de salida de resultados -->
+        <div id="output" class="text-center mt-4">
+            <!-- Los resultados o errores se mostrarán aquí -->
+        </div>
+
+        <!-- Indicador de carga -->
+        <div id="loading" class="text-center mt-4" style="display: none;">
+            <div class="spinner-border text-light" role="status">
+                <span class="sr-only">Cargando...</span>
+            </div>
+        </div>
+        
+        <!-- Sección de novedades 
+        <div class="text-center mt-4 intro-text">
+            <p>¡Revisa nuestras últimas novedades y actualizaciones aquí!</p>
+        </div>
+        -->
+        
+    </div>
+
+    <style>
+        /* Imagen de fondo para la página */
+        body {
+            background: url("{{ url_for('static', filename='img/background2.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Estilo mejorado para el título */
+        .title-animate {
+            font-size: 3rem;
+            color: #e0e0e0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Animación en el botón */
+        .btn-animate {
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-animate:hover {
+            transform: scale(1.05);
+            background-color: #9a67ea;
+            border-color: #9a67ea;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animaciones suaves al aparecer el contenido */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Estilo para la sección de novedades */
+        .intro-text {
+            font-size: 1.25rem;
+            color: #b0b0b0;
+        }
+        
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .title-animate {
+                font-size: 2rem;
+            }
+            .btn-animate {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+
+    <script>
+        // Mostrar el indicador de carga y ocultar el área de salida
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('output').style.display = 'none';
+        }
+
+        // Ocultar el indicador de carga y mostrar el área de salida
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('output').style.display = 'block';
+        }
+        /*
+        // Función para ejecutar el módulo armónico
+        document.getElementById('run-armonico-btn').addEventListener('click', function() {
+            showLoading();
+            fetch('/run_armonico', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                alert('El módulo armónico ha sido ejecutado.');
+            })
+            .catch(error => {
+                hideLoading();
+                console.error('Error:', error);
+                alert('Hubo un error al ejecutar el módulo armónico.');
+            });
+        });
+
+        // Función para ejecutar el módulo péndulo
+        document.getElementById('run-pendulo-btn').addEventListener('click', function() {
+            showLoading();
+            fetch('/run_pendulo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                alert('El módulo péndulo ha sido ejecutado.');
+            })
+            .catch(error => {
+                hideLoading();
+                console.error('Error:', error);
+                alert('Hubo un error al ejecutar el módulo péndulo.');
+            });
+        });
+        */
+        // Función para redirigir a la página de gráficas
+        document.getElementById('run-graph_obstaculo-btn').addEventListener('click', function() {
+            window.location.href = '/graph_obstaculo';
+        });
+        // Función para redirigir a la página de gráficas
+        document.getElementById('run-graph_distancia-btn').addEventListener('click', function() {
+            window.location.href = '/graph_distancia';
+        });
+        // Función para redirigir a la página de tablas
+        document.getElementById('run-table_obstaculo-btn').addEventListener('click', function() {
+            window.location.href = '/table_obstaculo';
+        });
+        // Función para redirigir a la página de gráficas
+        document.getElementById('run-graph_hall-btn').addEventListener('click', function() {
+            window.location.href = '/graph_hall';
+        });
+    </script>
+{% endblock %}

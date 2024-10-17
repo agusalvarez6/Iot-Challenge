@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <!-- Espacio para el logotipo -->
+        <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="Logotipo" class="img-fluid" style="max-width: 600px;">
+        </div>
+
+        <br>
+
+        <!-- Título de la página con estilo mejorado -->
+        <h1 class="text-center mb-4 title-animate">Bienvenidos a Smart Labs</h1>
+
+        <!-- Descripción introductoria reubicada -->
+        <p class="text-center mb-4 intro-text">¡Revolucionando los laboratorios de física!</p>
+
+        <!-- Botones para ejecutar módulos con animación -->
+        <div class="text-center mb-4">
+            <button id="run-armonico-btn" class="btn btn-primary btn-lg mx-2 btn-animate">
+                <i class="fas fa-play mr-2"></i>Comenzar
+            </button>
+        </div>
+
+        <br>
+        <br>
+
+        <!-- Espacio para novedades -->
+        <div class="text-center mb-4">
+            <h4 class="text-center mb-4">Últimas Novedades</h4>
+            <ul class="list-unstyled">
+                <li>Actualización 1: Práctica de movimiento armónico añadida.</li>
+                <li>Actualización 2: Práctica de periodo añadida.</li>
+            </ul>
+        </div>
+
+        <!-- Área de salida de resultados -->
+        <div id="output" class="text-center mt-4"></div>
+
+        <!-- Indicador de carga -->
+        <div id="loading" class="text-center mt-4" style="display: none;">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Cargando...</span>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Imagen de fondo para la página */
+        body {
+            background: url("{{ url_for('static', filename='img/background2.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Estilo mejorado para el título */
+        .title-animate {
+            font-size: 3rem;
+            color: #e0e0e0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Animación en el botón */
+        .btn-animate {
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-animate:hover {
+            transform: scale(1.05);
+            background-color: #9a67ea;
+            border-color: #9a67ea;
+        }
+
+        /* Animaciones suaves al aparecer el contenido */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Estilo para la sección de novedades */
+        .intro-text {
+            font-size: 1.25rem;
+            color: #b0b0b0;
+        }
+    </style>
+
+    <script>
+        // Aplicar animación de desvanecimiento a los elementos cuando la página cargue
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.fade-in').forEach(function(el) {
+                el.classList.add('fade-in');
+            });
+        });
+
+        // Mostrar el indicador de carga y ocultar el área de salida
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('output').style.display = 'none';
+        }
+
+        // Ocultar el indicador de carga y mostrar el área de salida
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('output').style.display = 'block';
+        }
+
+        // Redirigir a la página de prácticas al hacer clic en "Comenzar"
+        document.getElementById('run-armonico-btn').addEventListener('click', function() {
+            showLoading();
+            setTimeout(() => {
+                window.location.href = "{{ url_for('practicas') }}";
+            }, 1000);  // Simulación de tiempo de carga
+        });
+    </script>
+{% endblock %}
